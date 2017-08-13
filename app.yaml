@@ -1,0 +1,27 @@
+runtime: go
+api_version: go1
+
+handlers:  
+- url: /
+  static_files: frontend/dist/unauth/index.html
+  upload: frontend/dist/unauth/index.html
+  secure: always
+
+- url: /api/unauth/?.*$
+  script: _go_app
+  secure: always
+
+- url: /api/auth?.*$
+  script: _go_app
+  login: required
+  secure: always
+
+- url: /api/admin?.*$
+  script: _go_app
+  login: admin
+  secure: always
+  
+- url: /(.*)
+  static_files: frontend/dist/\1
+  upload: frontend/dist/(.*)  
+  secure: always  
