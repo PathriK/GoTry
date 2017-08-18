@@ -1,16 +1,21 @@
 package hello
 
 import (
-    "fmt"
+	"bytes"
+	"encoding/json"
+	"fmt"
 	"html/template"
-		"net/http"
-		"encoding/json"		
-		"log"
-	"bytes"	
+	"log"
+	"net/http"
+
 	"appengine"
 	"appengine/datastore"
-	"appengine/user"	
+	"appengine/user"
 )
+
+const homeType = "Home"
+const homeParentType = "HomeParent"
+const homeParentName = "home_parent"
 
 var mcqpage = template.Must(template.New("mcqpage").Parse(`
 <html>
@@ -57,130 +62,163 @@ var mcquser = template.Must(template.New("mcquser").Parse(`
 `))
 
 type MCQ struct {
-	ID string
-	Question  string
-	Options []string
-	Answer string
+	ID       string
+	Question string
+	Options  []string
+	Answer   string
 }
 
 type tab struct {
 	Name string `json:"name"`
-	URL string `json:"url"`
+	URL  string `json:"url"`
+}
+
+type home struct {
+	Title string   `json:"title"`
+	Tabs  []string `json:"tabs"`
 }
 
 func init() {
-	http.HandleFunc("/api/unauth/home", tabHandler)
-    http.HandleFunc("/mcq", mainhandler)
+	http.HandleFunc("/api/unauth/home/add", homeaddhandler)
+	http.HandleFunc("/api/unauth/home", homeHandler)
+	http.HandleFunc("/mcq/", mainhandler)
 	http.HandleFunc("/mcq/submit", submithandler)
 	http.HandleFunc("/mcq/add", addhandler)
 }
 
-func tabHandler(w http.ResponseWriter, r *http.Request){
-	tabs := []tab {
-		tab{Name: "HOME", URL: "/"},
-		tab{Name: "Contact Us", URL: "/contact-us"},
+func homeaddhandler(w http.ResponseWriter, r *http.Request) {
+	c := appengine.NewContext(r)
+	parentKey := datastore.NewKey(c, homeParentType, homeParentName, 0, nil)
+	key := datastore.NewIncompleteKey(c, homeType, parentKey)
+	homeJSON := home{
+		Title: "My Page",
+		Tabs:  []string{"Home", "Gallery", "Courses", "Contact Us", "Demo Test"},
 	}
-	home := struct {
-		Title string `json:"title"`
-		Tabs []tab `json:"tabs"`
-	}	{
-		Title : "MyPage",
-		Tabs : tabs,
+	_, err := datastore.Put(c, key, &homeJSON)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
-	js, err := json.Marshal(home)
-  if err != nil {
-    http.Error(w, err.Error(), http.StatusInternalServerError)
-    return
-  }
-	log.Printf("JSON:%s",home)
-  w.Header().Set("Content-Type", "application/json")
-  w.Write(js)
+	fmt.Fprint(w, "Done!")
+}
+
+func homeHandler(w http.ResponseWriter, r *http.Request) {
+	// tabs := []tab {
+	// 	tab{Name: "HOME", URL: "/"},
+	// 	tab{Name: "Contact Us", URL: "/contact-us"},
+	// }
+	// home := struct {
+	// 	Title string `json:"title"`
+	// 	Tabs []tab `json:"tabs"`
+	// }	{
+	// 	Title : "MyPage",
+	// 	Tabs : tabs,
+	// }
+
+	c := appengine.NewContext(r)
+	parentKey := datastore.NewKey(c, homeParentType, homeParentName, 0, nil)
+	q := datastore.NewQuery(homeType).Ancestor(parentKey).Limit(1)
+	var homes []home
+	if _, err := q.GetAll(c, &homes); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	js, err := json.Marshal(homes[0])
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	log.Printf("JSON:%s", homes[0])
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(js)
 }
 
 // mcqKey returns the key used for all guestbook entries.
 func mcqKey(c appengine.Context) *datastore.Key {
-        return datastore.NewKey(c, "MCQS", "default_mcq", 0, nil)
+	return datastore.NewKey(c, "MCQS", "default_mcq", 0, nil)
 }
 
 func mainhandler(w http.ResponseWriter, r *http.Request) {
-    ctx := appengine.NewContext(r)
+	ctx := appengine.NewContext(r)
 	u := user.Current(ctx)
-	resp := ""
+	// resp := ""
 	if u == nil {
-			url, _ := user.LoginURL(ctx, "/")
-			resp = resp + fmt.Sprintf(`<a href="%s">Sign in or register</a>`, url)
-			return
+		url, _ := user.LoginURL(ctx, "/")
+		// resp = resp + fmt.Sprintf(`<a href="%s">Sign in or register</a>`, url)
+		http.Redirect(w, r, url, http.StatusFound)
 	}
-	url, _ := user.LogoutURL(ctx, "/")
-	resp = resp + fmt.Sprintf(`Welcome, %s! <a href="%s">sign out</a><br>`, u, url)
+	// url, _ := user.LogoutURL(ctx, "/")
+	// resp = resp + fmt.Sprintf(`Welcome, %s! <a href="%s">sign out</a><br>`, u, url)
 	if u.Admin {
-		resp = resp + getAdminContents(ctx)
-    } else {
-		resp = resp + getUserContents(ctx)
+		// resp = resp + getAdminContents(ctx)
+		http.ServeFile(w, r, "frontend/dist/mcq/admin/")
+	} else {
+		// resp = resp + getUserContents(ctx)
+		http.ServeFile(w, r, "frontend/dist/mcq/user/")
 	}
-	
-	if err := mcqpage.Execute(w, template.HTML(resp)); err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
+
+	// if err := mcqpage.Execute(w, template.HTML(resp)); err != nil {
+	// 	http.Error(w, err.Error(), http.StatusInternalServerError)
+	// }
 }
 
 func submithandler(w http.ResponseWriter, r *http.Request) {
 	c := appengine.NewContext(r)
 	err := r.ParseForm()
-    if err != nil {
+	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return        
-    }
-    id := r.PostFormValue("id")
+		return
+	}
+	id := r.PostFormValue("id")
 	ansExp := r.PostFormValue("mcq")
-			
+
 	q := datastore.NewQuery("MCQ").Ancestor(mcqKey(c)).Filter("ID =", id).Limit(1)
 	mcqs := make([]MCQ, 0, 1)
 	if _, err := q.GetAll(c, &mcqs); err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 	ans := mcqs[0].Answer
 	status := "Wrong Answer!"
 	if ansExp == ans {
 		status = "Correct Answer!"
-	}	
-		
+	}
+
 	if err := mcqpage.Execute(w, template.HTML(status)); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 }
 
-func addhandler(w http.ResponseWriter, r *http.Request) {		
+func addhandler(w http.ResponseWriter, r *http.Request) {
 	c := appengine.NewContext(r)
 	err := r.ParseForm()
-    if err != nil {
+	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return        
-    }	
+		return
+	}
 	mcq := MCQ{
-		ID: r.FormValue("id`"),
+		ID:       r.FormValue("id`"),
 		Question: r.FormValue("question"),
-		Options: []string{r.FormValue("mcq1"),r.FormValue("mcq2"),r.FormValue("mcq3"),r.FormValue("mcq4")},
-		Answer: r.FormValue("answer"),
+		Options:  []string{r.FormValue("mcq1"), r.FormValue("mcq2"), r.FormValue("mcq3"), r.FormValue("mcq4")},
+		Answer:   r.FormValue("answer"),
 	}
 	key := datastore.NewIncompleteKey(c, "MCQ", mcqKey(c))
 	_, err = datastore.Put(c, key, &mcq)
 	if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
-	http.Redirect(w, r, "/mcq", http.StatusFound)	
+	http.Redirect(w, r, "/mcq", http.StatusFound)
 }
 
-func getAdminContents(c appengine.Context) string{
+func getAdminContents(c appengine.Context) string {
 	var resp bytes.Buffer
 	q := datastore.NewQuery("MCQ").Ancestor(mcqKey(c))
-	cnt,err := q.Count(c);
+	cnt, err := q.Count(c)
 	if err != nil {
 		return err.Error()
 	}
-	
+
 	mcqs := make([]MCQ, 0, cnt)
 	if _, err := q.GetAll(c, &mcqs); err != nil {
 		return err.Error()
@@ -188,11 +226,11 @@ func getAdminContents(c appengine.Context) string{
 	if err := mcqadmin.Execute(&resp, mcqs); err != nil {
 		return err.Error()
 	}
-	
+
 	return resp.String()
 }
 
-func getUserContents(c appengine.Context) string{
+func getUserContents(c appengine.Context) string {
 	var resp bytes.Buffer
 	q := datastore.NewQuery("MCQ").Ancestor(mcqKey(c)).Limit(10)
 	mcqs := make([]MCQ, 0, 10)
@@ -202,6 +240,6 @@ func getUserContents(c appengine.Context) string{
 	if err := mcquser.Execute(&resp, mcqs[:1]); err != nil {
 		return err.Error()
 	}
-	
+
 	return resp.String()
 }

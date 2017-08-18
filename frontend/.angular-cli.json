@@ -32,7 +32,7 @@
     {
       "name": "mcq_user",
       "root": "src/mcq_user",
-      "outDir": "dist/mcq_user",
+      "outDir": "dist/mcq/user",
       "assets": [
         "assets",
         "favicon.ico"
@@ -57,7 +57,7 @@
     {
       "name": "mcq_admin",
       "root": "src/mcq_admin",
-      "outDir": "dist/mcq_admin",
+      "outDir": "dist/mcq/admin",
       "assets": [
         "assets",
         "favicon.ico"

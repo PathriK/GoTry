@@ -5,10 +5,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --app unauth --aot --base-href /unauth/ & ng build --app mcq_user --aot --base-href . & ng build --app mcq_admin --aot --base-href .",
+    "build": "ng build --app mcq_user --base-href /static/mcq_user/ --watch",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "build-all": "ng build --app unauth --aot --base-href /static/unauth/ & ng build --app mcq_user --aot --base-href /static/mcq/user/ & ng build --app mcq_admin --aot --base-href /static/mcq/admin/"
   },
   "private": true,
   "dependencies": {
