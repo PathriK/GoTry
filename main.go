@@ -8,6 +8,8 @@ import (
 	"log"
 	"net/http"
 
+	"controller"
+
 	"appengine"
 	"appengine/datastore"
 	"appengine/user"
@@ -79,9 +81,10 @@ type home struct {
 }
 
 func init() {
-	http.HandleFunc("/api/unauth/home/add", homeaddhandler)
-	http.HandleFunc("/api/unauth/home", homeHandler)
-	http.HandleFunc("/mcq/", mainhandler)
+	http.HandleFunc("/unauth/api/home/add", homeaddhandler)
+	http.HandleFunc("/unauth/api/home", homeHandler)
+	// http.HandleFunc("/mcq/", mainhandler)
+	http.HandleFunc("/mcq/", controller.McqHandler)
 	http.HandleFunc("/mcq/submit", submithandler)
 	http.HandleFunc("/mcq/add", addhandler)
 }

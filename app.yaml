@@ -12,7 +12,7 @@ handlers:
   secure: always
   login: required
 
-- url: /api/unauth/?$
+- url: /unauth/api/?.*$
   script: _go_app
   secure: always
 
@@ -26,7 +26,7 @@ handlers:
   login: admin
   secure: always
   
-- url: /static/(.*)
-  static_files: frontend/dist/\1
+- url: /(.*)/static/(.*)
+  static_files: frontend/dist/\1/\2
   upload: frontend/dist/(.*)  
   secure: always  

@@ -4,10 +4,12 @@
     "name": "go-try"
   },
   "apps": [
-      {
-        "name": "unauth",
+    {
+      "name": "unauth",
       "root": "src/unauth",
       "outDir": "dist/unauth",
+      "baseHref": "/unauth/",
+      "deployUrl": "static/",
       "assets": [
         "assets",
         "favicon.ico"
@@ -33,6 +35,8 @@
       "name": "mcq_user",
       "root": "src/mcq_user",
       "outDir": "dist/mcq/user",
+      "baseHref": "/mcq/user/",
+      "deployUrl": "static/",
       "assets": [
         "assets",
         "favicon.ico"
@@ -58,6 +62,8 @@
       "name": "mcq_admin",
       "root": "src/mcq_admin",
       "outDir": "dist/mcq/admin",
+      "baseHref": "/mcq/admin/",
+      "deployUrl": "static/",
       "assets": [
         "assets",
         "favicon.ico"

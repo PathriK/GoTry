@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Home } from "./home"
-import { TabServiceService } from './tab-service.service';
 
 @Component({
   selector: 'app-root',
@@ -11,15 +10,16 @@ export class AppComponent {
   isReady:boolean = false;
   home:Home;
 
-  constructor(private tabService: TabServiceService) { }
+  constructor() { }
 
   getHomeContents(): void {
-    this.tabService
-    .getContents()
-    .then(home => {
-      this.home = home;
-      this.isReady = true;
-    });
+    this.home = {
+      title: 'My Page',
+      tabs: [
+        'Home', 'Gallery', 'Courses', 'Contact Us', 'Demo Test'
+      ]
+    };
+    this.isReady = true;
   }
 
   ngOnInit(): void {
