@@ -2,11 +2,6 @@ runtime: go
 api_version: go1
 
 handlers:  
-- url: /
-  static_files: frontend/dist/unauth/index.html
-  upload: frontend/dist/unauth/index.html
-  secure: always
-
 - url: /mcq/?$
   script: _go_app
   secure: always
@@ -28,5 +23,19 @@ handlers:
   
 - url: /(.*)/static/(.*)
   static_files: frontend/dist/\1/\2
-  upload: frontend/dist/(.*)  
+  upload: frontend/dist/.*(js|css|ico|js\.map)$
   secure: always  
+
+- url: /.*
+  static_files: frontend/dist/unauth/index.html
+  upload: frontend/dist/unauth/index.html
+  secure: always  
+
+skip_files:
+- ^\.git$
+- ^\.vscode$
+- \.gitignore
+- ^app\.yaml
+- ^LICENSE
+- ^README\..*
+- frontend/src/

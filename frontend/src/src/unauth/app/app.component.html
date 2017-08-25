@@ -1,0 +1,18 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div *ngIf="isReady">
+<div style="text-align:center">
+  <h1>
+    Welcome to {{home.title}}!
+  </h1>
+</div>
+<nav md-tab-nav-bar>
+  <a md-tab-link
+     *ngFor="let tab of home.tabs"
+     [routerLink]="tab | spaceReplace:'_'| lowercase"
+     routerLinkActive #rla="routerLinkActive"
+     [active]="rla.isActive">
+     {{tab}}
+  </a>
+</nav>
+<router-outlet></router-outlet>
+</div>

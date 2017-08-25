@@ -1,14 +1,12 @@
-package hello
+package gotry
 
 import (
 	"bytes"
+	"controller"
 	"encoding/json"
 	"fmt"
 	"html/template"
-	"log"
 	"net/http"
-
-	"controller"
 
 	"appengine"
 	"appengine/datastore"
@@ -81,10 +79,19 @@ type home struct {
 }
 
 func init() {
+	// ctx := appengine.NewContext(r)
+	// if correctobj, ok := controller.(interface {
+	// 	McqHandler(http.ResponseWriter, *http.Request)
+	// }); ok {
+	// 	ctx.Debugf("init: MCQ Handler exist")
+	// } else {
+	// 	ctx.Debugf("init: MCQ Handler NOT exist")
+	// }
 	http.HandleFunc("/unauth/api/home/add", homeaddhandler)
 	http.HandleFunc("/unauth/api/home", homeHandler)
 	// http.HandleFunc("/mcq/", mainhandler)
 	http.HandleFunc("/mcq/", controller.McqHandler)
+	// http.Handle("/mcq/", http.StripPrefix("/mcq/", http.FileServer(http.Dir("./testing"))))
 	http.HandleFunc("/mcq/submit", submithandler)
 	http.HandleFunc("/mcq/add", addhandler)
 }
@@ -131,7 +138,7 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	log.Printf("JSON:%s", homes[0])
+	//ctx.Printf("JSON:%s", homes[0])
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(js)
 }
