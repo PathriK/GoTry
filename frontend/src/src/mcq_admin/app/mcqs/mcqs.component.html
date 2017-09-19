@@ -1,0 +1,11 @@
+<div *ngIf="isReady">
+  <md-list>
+    <md-list-item *ngFor="let mcq of mcqs">
+      <div md-line> {{mcq.question}} </div>
+      <p md-line>
+        <span *ngFor="let choice of mcq.choices;let i = index" [ngStyle]="(i+1 === mcq.answer) && {'font-weight': 'bold'}" > {{choice}} </span>
+      </p>
+    </md-list-item>
+  </md-list>
+</div>
+

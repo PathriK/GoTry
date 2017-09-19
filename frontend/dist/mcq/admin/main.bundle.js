@@ -13,6 +13,67 @@ webpackEmptyAsyncContext.id = "../../../../../src/mcq_admin lazy recursive";
 
 /***/ }),
 
+/***/ "../../../../../src/mcq_admin/app/add/add.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/mcq_admin/app/add/add.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n  add works!\n</p>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/mcq_admin/app/add/add.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var AddComponent = (function () {
+    function AddComponent() {
+    }
+    AddComponent.prototype.ngOnInit = function () {
+    };
+    return AddComponent;
+}());
+AddComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
+        selector: 'app-add',
+        template: __webpack_require__("../../../../../src/mcq_admin/app/add/add.component.html"),
+        styles: [__webpack_require__("../../../../../src/mcq_admin/app/add/add.component.css")]
+    }),
+    __metadata("design:paramtypes", [])
+], AddComponent);
+
+//# sourceMappingURL=add.component.js.map
+
+/***/ }),
+
 /***/ "../../../../../src/mcq_admin/app/app.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -34,7 +95,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/mcq_admin/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<div style=\"text-align:center\">\n  <h1>\n    Admin to {{title}}!\n  </h1>\n  <img width=\"300\" src=\"data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxOS4xLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHZpZXdCb3g9IjAgMCAyNTAgMjUwIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAyNTAgMjUwOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPg0KCS5zdDB7ZmlsbDojREQwMDMxO30NCgkuc3Qxe2ZpbGw6I0MzMDAyRjt9DQoJLnN0MntmaWxsOiNGRkZGRkY7fQ0KPC9zdHlsZT4NCjxnPg0KCTxwb2x5Z29uIGNsYXNzPSJzdDAiIHBvaW50cz0iMTI1LDMwIDEyNSwzMCAxMjUsMzAgMzEuOSw2My4yIDQ2LjEsMTg2LjMgMTI1LDIzMCAxMjUsMjMwIDEyNSwyMzAgMjAzLjksMTg2LjMgMjE4LjEsNjMuMiAJIi8+DQoJPHBvbHlnb24gY2xhc3M9InN0MSIgcG9pbnRzPSIxMjUsMzAgMTI1LDUyLjIgMTI1LDUyLjEgMTI1LDE1My40IDEyNSwxNTMuNCAxMjUsMjMwIDEyNSwyMzAgMjAzLjksMTg2LjMgMjE4LjEsNjMuMiAxMjUsMzAgCSIvPg0KCTxwYXRoIGNsYXNzPSJzdDIiIGQ9Ik0xMjUsNTIuMUw2Ni44LDE4Mi42aDBoMjEuN2gwbDExLjctMjkuMmg0OS40bDExLjcsMjkuMmgwaDIxLjdoMEwxMjUsNTIuMUwxMjUsNTIuMUwxMjUsNTIuMUwxMjUsNTIuMQ0KCQlMMTI1LDUyLjF6IE0xNDIsMTM1LjRIMTA4bDE3LTQwLjlMMTQyLDEzNS40eiIvPg0KPC9nPg0KPC9zdmc+DQo=\">\n</div>\n<h2>Here are some links to help you start: </h2>\n<ul>\n  <li>\n    <h2><a target=\"_blank\" href=\"https://angular.io/tutorial\">Tour of Heroes</a></h2>\n  </li>\n  <li>\n    <h2><a target=\"_blank\" href=\"https://github.com/angular/angular-cli/wiki\">CLI Documentation</a></h2>\n  </li>\n  <li>\n    <h2><a target=\"_blank\" href=\"https://blog.angular.io//\">Angular blog</a></h2>\n  </li>\n</ul>\n\n"
+module.exports = "<div *ngIf=\"isReady\">\n  <div style=\"text-align:center\">\n    <h1>\n      Welcome to {{admin.title}}!\n    </h1>\n  </div>\n  <nav md-tab-nav-bar>\n    <a md-tab-link\n       *ngFor=\"let tab of admin.tabs\"\n       [routerLink]=\"tab.url\"\n       routerLinkActive #rla=\"routerLinkActive\"\n       [active]=\"rla.isActive\">\n       {{tab.name}}\n    </a>\n  </nav>\n  <router-outlet></router-outlet>\n  </div>\n"
 
 /***/ }),
 
@@ -50,19 +111,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 
 var AppComponent = (function () {
     function AppComponent() {
-        this.title = 'admin';
+        this.isReady = false;
     }
+    AppComponent.prototype.getAdminContents = function () {
+        this.admin = {
+            title: 'MCQ Admin',
+            tabs: [
+                {
+                    name: 'MCQ List',
+                    url: 'list'
+                }
+            ]
+        };
+        this.isReady = true;
+    };
+    AppComponent.prototype.ngOnInit = function () {
+        this.getAdminContents();
+    };
     return AppComponent;
 }());
 AppComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
         selector: 'app-root',
         template: __webpack_require__("../../../../../src/mcq_admin/app/app.component.html"),
         styles: [__webpack_require__("../../../../../src/mcq_admin/app/app.component.css")]
-    })
+    }),
+    __metadata("design:paramtypes", [])
 ], AppComponent);
 
 //# sourceMappingURL=app.component.js.map
@@ -76,8 +156,13 @@ AppComponent = __decorate([
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__("../../../platform-browser/@angular/platform-browser.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_component__ = __webpack_require__("../../../../../src/mcq_admin/app/app.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_platform_browser_animations__ = __webpack_require__("../../../platform-browser/@angular/platform-browser/animations.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__("../../../../../src/mcq_admin/app/app.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_platform_browser_animations__ = __webpack_require__("../../../platform-browser/@angular/platform-browser/animations.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_material__ = __webpack_require__("../../../material/@angular/material.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__mcqs_mcqs_component__ = __webpack_require__("../../../../../src/mcq_admin/app/mcqs/mcqs.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__add_add_component__ = __webpack_require__("../../../../../src/mcq_admin/app/add/add.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -88,26 +173,134 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
+
+
+
+
+
 var AppModule = (function () {
     function AppModule() {
     }
     return AppModule;
 }());
 AppModule = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["L" /* NgModule */])({
+    Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["M" /* NgModule */])({
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_2__app_component__["a" /* AppComponent */]
+            __WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */],
+            __WEBPACK_IMPORTED_MODULE_7__mcqs_mcqs_component__["a" /* McqsComponent */],
+            __WEBPACK_IMPORTED_MODULE_8__add_add_component__["a" /* AddComponent */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
-            __WEBPACK_IMPORTED_MODULE_3__angular_platform_browser_animations__["a" /* BrowserAnimationsModule */]
+            __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* HttpModule */],
+            __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* RouterModule */].forRoot([
+                {
+                    path: 'list',
+                    component: __WEBPACK_IMPORTED_MODULE_7__mcqs_mcqs_component__["a" /* McqsComponent */]
+                },
+                {
+                    path: 'add',
+                    component: __WEBPACK_IMPORTED_MODULE_8__add_add_component__["a" /* AddComponent */]
+                },
+                {
+                    path: '**',
+                    redirectTo: '/list',
+                    pathMatch: 'full'
+                }
+            ]),
+            __WEBPACK_IMPORTED_MODULE_5__angular_platform_browser_animations__["a" /* BrowserAnimationsModule */],
+            __WEBPACK_IMPORTED_MODULE_6__angular_material__["b" /* MdTabsModule */],
+            __WEBPACK_IMPORTED_MODULE_6__angular_material__["a" /* MdListModule */]
         ],
         providers: [],
-        bootstrap: [__WEBPACK_IMPORTED_MODULE_2__app_component__["a" /* AppComponent */]]
+        bootstrap: [__WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */]]
     })
 ], AppModule);
 
 //# sourceMappingURL=app.module.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/mcq_admin/app/mcqs/mcqs.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/mcq_admin/app/mcqs/mcqs.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div *ngIf=\"isReady\">\n  <md-list>\n    <md-list-item *ngFor=\"let mcq of mcqs\">\n      <div md-line> {{mcq.question}} </div>\n      <p md-line>\n        <span *ngFor=\"let choice of mcq.choices;let i = index\" [ngStyle]=\"(i+1 === mcq.answer) && {'font-weight': 'bold'}\" > {{choice}} </span>\n      </p>\n    </md-list-item>\n  </md-list>\n</div>\n\n"
+
+/***/ }),
+
+/***/ "../../../../../src/mcq_admin/app/mcqs/mcqs.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return McqsComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var McqsComponent = (function () {
+    function McqsComponent() {
+        this.isReady = false;
+    }
+    McqsComponent.prototype.getMCQs = function () {
+        this.mcqs = [{
+                question: "Sample Question 1",
+                choices: [
+                    "Ch1",
+                    "ch2"
+                ],
+                answer: 1
+            },
+            {
+                question: "Sample Question 2",
+                choices: [
+                    "Ch1",
+                    "ch2"
+                ],
+                answer: 2
+            }];
+        this.isReady = true;
+    };
+    McqsComponent.prototype.ngOnInit = function () {
+        this.getMCQs();
+    };
+    return McqsComponent;
+}());
+McqsComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
+        selector: 'app-mcqs',
+        template: __webpack_require__("../../../../../src/mcq_admin/app/mcqs/mcqs.component.html"),
+        styles: [__webpack_require__("../../../../../src/mcq_admin/app/mcqs/mcqs.component.css")]
+    }),
+    __metadata("design:paramtypes", [])
+], McqsComponent);
+
+//# sourceMappingURL=mcqs.component.js.map
 
 /***/ }),
 
@@ -142,7 +335,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 if (__WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].production) {
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_19" /* enableProdMode */])();
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_23" /* enableProdMode */])();
 }
 Object(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_2__app_app_module__["a" /* AppModule */]);
 //# sourceMappingURL=main.js.map

@@ -8,6 +8,7 @@ import { SpaceReplacePipe } from './space-replace.pipe';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MdTabsModule } from '@angular/material';
+
 import { HomeComponent } from './home/home.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { CoursesComponent } from './courses/courses.component';

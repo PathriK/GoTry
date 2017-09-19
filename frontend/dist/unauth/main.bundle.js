@@ -34,7 +34,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/unauth/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<div *ngIf=\"isReady\">\n<div style=\"text-align:center\">\n  <h1>\n    Welcome to {{home.title}}!\n  </h1>\n</div>\n<nav md-tab-nav-bar>\n  <a md-tab-link\n     *ngFor=\"let tab of home.tabs\"\n     [routerLink]=\"tab | spaceReplace:'_'| lowercase\"\n     routerLinkActive #rla=\"routerLinkActive\"\n     [active]=\"rla.isActive\">\n     {{tab}}\n  </a>\n</nav>\n<router-outlet></router-outlet>\n</div>\n"
+module.exports = "<div *ngIf=\"isReady\">\n<div style=\"text-align:center\">\n  <h1>\n    Welcome to {{home.title}}!\n  </h1>\n</div>\n<nav md-tab-nav-bar>\n  <a md-tab-link\n     *ngFor=\"let tab of home.tabs\"\n     [routerLink]=\"tab | spaceReplace:'_'| lowercase\"\n     routerLinkActive #rla=\"routerLinkActive\"\n     [active]=\"rla.isActive\">\n     {{tab}}\n  </a>\n</nav>\n<router-outlet></router-outlet>\n</div>\n"
 
 /***/ }),
 
