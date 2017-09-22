@@ -82,7 +82,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".admin-content {\r\n  margin: 0;\r\n  width: 100%;\r\n  min-height: 100vh;\r\n}\r\n\r\nmd-sidenav {\r\n  min-width: 200px;\r\n}\r\n\r\n.selected-tab{\r\n  font-weight: 600;\r\n}\r\n", ""]);
 
 // exports
 
@@ -95,7 +95,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/mcq_admin/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"isReady\">\n  <div style=\"text-align:center\">\n    <h1>\n      Welcome to {{admin.title}}!\n    </h1>\n  </div>\n  <nav md-tab-nav-bar>\n    <a md-tab-link\n       *ngFor=\"let tab of admin.tabs\"\n       [routerLink]=\"tab.url\"\n       routerLinkActive #rla=\"routerLinkActive\"\n       [active]=\"rla.isActive\">\n       {{tab.name}}\n    </a>\n  </nav>\n  <router-outlet></router-outlet>\n  </div>\n"
+module.exports = "<div *ngIf=\"isReady\">\n    <md-toolbar color=\"primary\">\n        <button md-icon-button (click)=\"sidenav.toggle()\">\n            <md-icon class=\"md-24\" >menu</md-icon>\n        </button>\n        <span>{{admin.title}}</span>\n      </md-toolbar>\n    <md-sidenav-container>\n        <md-sidenav #sidenav mode=\"side\" class=\"app-sidenav\">\n            <md-nav-list>\n                <a md-list-item\n                *ngFor=\"let tab of admin.tabs\"\n                [routerLink]=\"tab.url\"\n                routerLinkActive=\"selected-tab\"\n                (click)=\"sidenav.toggle()\">\n                {{tab.name}}\n             </a>\n             </md-nav-list>\n        </md-sidenav>\n        <div class=\"admin-content\">\n        <router-outlet></router-outlet>\n        </div>\n      </md-sidenav-container>\n</div>\n\n\n\n"
 
 /***/ }),
 
@@ -126,6 +126,10 @@ var AppComponent = (function () {
                 {
                     name: 'MCQ List',
                     url: 'list'
+                },
+                {
+                    name: 'MCQ Add',
+                    url: 'add'
                 }
             ]
         };
@@ -163,12 +167,19 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_material__ = __webpack_require__("../../../material/@angular/material.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__mcqs_mcqs_component__ = __webpack_require__("../../../../../src/mcq_admin/app/mcqs/mcqs.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__add_add_component__ = __webpack_require__("../../../../../src/mcq_admin/app/add/add.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__redirect_redirect_component__ = __webpack_require__("../../../../../src/mcq_admin/app/redirect/redirect.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
+
+
+
+
 
 
 
@@ -189,7 +200,8 @@ AppModule = __decorate([
         declarations: [
             __WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */],
             __WEBPACK_IMPORTED_MODULE_7__mcqs_mcqs_component__["a" /* McqsComponent */],
-            __WEBPACK_IMPORTED_MODULE_8__add_add_component__["a" /* AddComponent */]
+            __WEBPACK_IMPORTED_MODULE_8__add_add_component__["a" /* AddComponent */],
+            __WEBPACK_IMPORTED_MODULE_9__redirect_redirect_component__["a" /* RedirectComponent */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -210,8 +222,13 @@ AppModule = __decorate([
                 }
             ]),
             __WEBPACK_IMPORTED_MODULE_5__angular_platform_browser_animations__["a" /* BrowserAnimationsModule */],
-            __WEBPACK_IMPORTED_MODULE_6__angular_material__["b" /* MdTabsModule */],
-            __WEBPACK_IMPORTED_MODULE_6__angular_material__["a" /* MdListModule */]
+            __WEBPACK_IMPORTED_MODULE_6__angular_material__["e" /* MdTabsModule */],
+            __WEBPACK_IMPORTED_MODULE_6__angular_material__["c" /* MdListModule */],
+            __WEBPACK_IMPORTED_MODULE_6__angular_material__["b" /* MdIconModule */],
+            __WEBPACK_IMPORTED_MODULE_6__angular_material__["a" /* MdButtonModule */],
+            __WEBPACK_IMPORTED_MODULE_6__angular_material__["g" /* MdTooltipModule */],
+            __WEBPACK_IMPORTED_MODULE_6__angular_material__["d" /* MdSidenavModule */],
+            __WEBPACK_IMPORTED_MODULE_6__angular_material__["f" /* MdToolbarModule */]
         ],
         providers: [],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */]]
@@ -230,7 +247,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".number-icon {\r\n  background-color: grey;\r\n  text-align: center;\r\n  line-height: 1em;\r\n  color: white;\r\n}\r\n", ""]);
 
 // exports
 
@@ -243,7 +260,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/mcq_admin/app/mcqs/mcqs.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"isReady\">\n  <md-list>\n    <md-list-item *ngFor=\"let mcq of mcqs\">\n      <div md-line> {{mcq.question}} </div>\n      <p md-line>\n        <span *ngFor=\"let choice of mcq.choices;let i = index\" [ngStyle]=\"(i+1 === mcq.answer) && {'font-weight': 'bold'}\" > {{choice}} </span>\n      </p>\n    </md-list-item>\n  </md-list>\n</div>\n\n"
+module.exports = "<div *ngIf=\"isReady\">\n  <md-list>\n    <md-list-item *ngFor=\"let mcq of mcqs; let j = index\">\n        <span md-list-icon class=\"number-icon\">{{j+1}}</span>\n      <div md-line> {{mcq.question}} </div>\n      <p md-line>\n        <span *ngFor=\"let choice of mcq.choices; let i = index\"\n              [ngStyle]=\"(i+1 === mcq.answer) && {'font-weight': 'bold'}\" >\n                {{choice}}\n        </span>\n      </p>\n    </md-list-item>\n  </md-list>\n</div>\n\n"
 
 /***/ }),
 
@@ -301,6 +318,68 @@ McqsComponent = __decorate([
 ], McqsComponent);
 
 //# sourceMappingURL=mcqs.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/mcq_admin/app/redirect/redirect.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/mcq_admin/app/redirect/redirect.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n  redirect works!\n</p>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/mcq_admin/app/redirect/redirect.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RedirectComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var RedirectComponent = (function () {
+    function RedirectComponent() {
+    }
+    RedirectComponent.prototype.ngOnInit = function () {
+        window.location.href = '/add';
+    };
+    return RedirectComponent;
+}());
+RedirectComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
+        selector: 'app-redirect',
+        template: __webpack_require__("../../../../../src/mcq_admin/app/redirect/redirect.component.html"),
+        styles: [__webpack_require__("../../../../../src/mcq_admin/app/redirect/redirect.component.css")]
+    }),
+    __metadata("design:paramtypes", [])
+], RedirectComponent);
+
+//# sourceMappingURL=redirect.component.js.map
 
 /***/ }),
 

@@ -18,6 +18,10 @@ export class AppComponent {
         {
           name: 'MCQ List',
           url: 'list'
+        },
+        {
+          name: 'MCQ Add',
+          url: 'add'
         }
       ]
     };

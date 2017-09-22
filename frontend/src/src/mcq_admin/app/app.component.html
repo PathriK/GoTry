@@ -1,17 +1,27 @@
 <div *ngIf="isReady">
-  <div style="text-align:center">
-    <h1>
-      Welcome to {{admin.title}}!
-    </h1>
-  </div>
-  <nav md-tab-nav-bar>
-    <a md-tab-link
-       *ngFor="let tab of admin.tabs"
-       [routerLink]="tab.url"
-       routerLinkActive #rla="routerLinkActive"
-       [active]="rla.isActive">
-       {{tab.name}}
-    </a>
-  </nav>
-  <router-outlet></router-outlet>
-  </div>
+    <md-toolbar color="primary">
+        <button md-icon-button (click)="sidenav.toggle()">
+            <md-icon class="md-24" >menu</md-icon>
+        </button>
+        <span>{{admin.title}}</span>
+      </md-toolbar>
+    <md-sidenav-container>
+        <md-sidenav #sidenav mode="side" class="app-sidenav">
+            <md-nav-list>
+                <a md-list-item
+                *ngFor="let tab of admin.tabs"
+                [routerLink]="tab.url"
+                routerLinkActive="selected-tab"
+                (click)="sidenav.toggle()">
+                {{tab.name}}
+             </a>
+             </md-nav-list>
+        </md-sidenav>
+        <div class="admin-content">
+        <router-outlet></router-outlet>
+        </div>
+      </md-sidenav-container>
+</div>
+
+
+

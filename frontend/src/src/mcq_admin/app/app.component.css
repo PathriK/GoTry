@@ -1,0 +1,13 @@
+.admin-content {
+  margin: 0;
+  width: 100%;
+  min-height: 100vh;
+}
+
+md-sidenav {
+  min-width: 200px;
+}
+
+.selected-tab{
+  font-weight: 600;
+}
