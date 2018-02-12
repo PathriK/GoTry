@@ -1,3 +1,13 @@
-<p>
-  add works!
-</p>
+<form class="add-form" (ngSubmit)="onSubmit(mcq)">
+    <md-form-field class="question">
+        <textarea mdInput placeholder="Question" name="question" [(ngModel)]="mcq.question" ></textarea>
+      </md-form-field>
+  <md-radio-group name="mcq" class="mcq-radio-group" [(ngModel)]="mcq.answer">
+    <md-radio-button class="mcq-radio-button" *ngFor="let option of mcq.options; let i = index; trackBy:trackByFn" [value]="i+1">
+      <md-form-field class="option">
+        <input mdInput placeholder="Option {{i}}" name="option{{i}}" [(ngModel)]="mcq.options[i]" >
+      </md-form-field>
+    </md-radio-button>
+  </md-radio-group>
+  <button md-button type="submit">Add</button>
+</form>

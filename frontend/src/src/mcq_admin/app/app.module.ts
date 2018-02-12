@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpModule }    from '@angular/http';
-import { RouterModule }   from '@angular/router';
+import { HttpModule } from '@angular/http';
+import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 
@@ -10,14 +10,18 @@ import { MdTabsModule } from '@angular/material';
 import { MdListModule } from '@angular/material';
 import { MdIconModule } from '@angular/material';
 import { MdButtonModule } from '@angular/material';
-import {MdTooltipModule} from '@angular/material';
-import {MdSidenavModule} from '@angular/material';
-import {MdToolbarModule} from '@angular/material';
+import { MdTooltipModule } from '@angular/material';
+import { MdSidenavModule } from '@angular/material';
+import { MdToolbarModule } from '@angular/material';
+import { MatInputModule } from '@angular/material';
+import { MatRadioModule } from '@angular/material';
+import { FormsModule } from '@angular/forms';
 
-
-import {McqsComponent} from './mcqs/mcqs.component'
-import {AddComponent} from './add/add.component';
+import { McqsComponent } from './mcqs/mcqs.component';
+import { AddComponent } from './add/add.component';
 import { RedirectComponent } from './redirect/redirect.component';
+
+import { MCQService } from './mcq/mcq.service';
 
 @NgModule({
   declarations: [
@@ -51,9 +55,12 @@ import { RedirectComponent } from './redirect/redirect.component';
     MdButtonModule,
     MdTooltipModule,
     MdSidenavModule,
-    MdToolbarModule
+    MdToolbarModule,
+    MatInputModule,
+    MatRadioModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [MCQService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

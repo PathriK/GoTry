@@ -1,13 +1,13 @@
-import { Component } from '@angular/core';
-import { Admin } from "./admin"
+import { Component, OnInit } from '@angular/core';
+import { Admin } from './admin';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  isReady:boolean = false;
-  admin:Admin;
+export class AppComponent  implements OnInit {
+  isReady = false;
+  admin: Admin;
 
   constructor() {}
 
@@ -28,7 +28,7 @@ export class AppComponent {
     this.isReady = true;
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.getAdminContents();
   }
 }

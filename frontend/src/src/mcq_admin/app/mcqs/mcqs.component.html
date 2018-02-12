@@ -4,7 +4,7 @@
         <span md-list-icon class="number-icon">{{j+1}}</span>
       <div md-line> {{mcq.question}} </div>
       <p md-line>
-        <span *ngFor="let choice of mcq.choices; let i = index"
+        <span *ngFor="let choice of mcq.options; let i = index"
               [ngStyle]="(i+1 === mcq.answer) && {'font-weight': 'bold'}" >
                 {{choice}}
         </span>

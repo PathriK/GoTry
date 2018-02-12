@@ -2,16 +2,12 @@ runtime: go
 api_version: go1
 
 handlers:  
-- url: /unauth/api/?.*$
-  script: _go_app
-  secure: always
-
-- url: /api/auth/?$
+- url: /api/auth/?.*$
   script: _go_app
   login: required
   secure: always
 
-- url: /api/admin/?$
+- url: /api/admin/?.*$
   script: _go_app
   login: admin
   secure: always

@@ -4,9 +4,24 @@ import (
 	"net/http"
 
 	"appengine"
+	"appengine/datastore"
 	"appengine/user"
 )
 
+// MCQ is the base struct for MCQs
+type MCQ struct {
+	ID       string   `json:"id"`
+	Question string   `json:"question"`
+	Options  []string `json:"options"`
+	Answer   string   `json:"answer"`
+}
+
+// MCQKey returns the key used for all guestbook entries.
+func MCQKey(c appengine.Context) *datastore.Key {
+	return datastore.NewKey(c, "MCQS", "default_mcq", 0, nil)
+}
+
+// McqHandler handles MCQ User and Admin Home page display
 func McqHandler(w http.ResponseWriter, r *http.Request) {
 	ctx := appengine.NewContext(r)
 	ctx.Debugf("Inside MCQ Handler")

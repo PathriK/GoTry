@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {MCQ} from './mcq'
+
+import { MCQ } from '../mcq/mcq';
+import { MCQService } from '../mcq/mcq.service';
 
 @Component({
   selector: 'app-mcqs',
@@ -8,29 +10,18 @@ import {MCQ} from './mcq'
 })
 export class McqsComponent implements OnInit {
 
-  isReady:boolean = false;
-  mcqs:MCQ[];
+  isReady = false;
+  mcqs: MCQ[];
 
-  constructor() { }
+  constructor(
+    private mcqService: MCQService ) { }
 
-  getMCQs(){
-    this.mcqs = [{
-      question: "Sample Question 1",
-      choices: [
-        "Ch1",
-        "ch2"
-      ],
-      answer: 1
-    },
-    {
-      question: "Sample Question 2",
-      choices: [
-        "Ch1",
-        "ch2"
-      ],
-      answer: 2
-    }];
-    this.isReady = true;
+  getMCQs() {
+    this.mcqService.getMcqs().then(
+      mcqs => {
+        this.mcqs = mcqs;
+        this.isReady = true;
+      });
   }
 
   ngOnInit() {

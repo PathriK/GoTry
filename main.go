@@ -61,13 +61,6 @@ var mcquser = template.Must(template.New("mcquser").Parse(`
 </form>
 `))
 
-type MCQ struct {
-	ID       string
-	Question string
-	Options  []string
-	Answer   string
-}
-
 type tab struct {
 	Name string `json:"name"`
 	URL  string `json:"url"`
@@ -90,6 +83,7 @@ func init() {
 	http.HandleFunc("/unauth/api/home/add", homeaddhandler)
 	http.HandleFunc("/unauth/api/home", homeHandler)
 	// http.HandleFunc("/mcq/", mainhandler)
+	http.HandleFunc("/api/admin/mcq/list", controller.ListHandler)
 	http.HandleFunc("/mcq/", controller.McqHandler)
 	// http.Handle("/mcq/", http.StripPrefix("/mcq/", http.FileServer(http.Dir("./testing"))))
 	http.HandleFunc("/mcq/submit", submithandler)
@@ -143,11 +137,6 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write(js)
 }
 
-// mcqKey returns the key used for all guestbook entries.
-func mcqKey(c appengine.Context) *datastore.Key {
-	return datastore.NewKey(c, "MCQS", "default_mcq", 0, nil)
-}
-
 func mainhandler(w http.ResponseWriter, r *http.Request) {
 	ctx := appengine.NewContext(r)
 	u := user.Current(ctx)
@@ -182,8 +171,8 @@ func submithandler(w http.ResponseWriter, r *http.Request) {
 	id := r.PostFormValue("id")
 	ansExp := r.PostFormValue("mcq")
 
-	q := datastore.NewQuery("MCQ").Ancestor(mcqKey(c)).Filter("ID =", id).Limit(1)
-	mcqs := make([]MCQ, 0, 1)
+	q := datastore.NewQuery("MCQ").Ancestor(controller.MCQKey(c)).Filter("ID =", id).Limit(1)
+	mcqs := make([]controller.MCQ, 0, 1)
 	if _, err := q.GetAll(c, &mcqs); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -206,13 +195,13 @@ func addhandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	mcq := MCQ{
+	mcq := controller.MCQ{
 		ID:       r.FormValue("id`"),
 		Question: r.FormValue("question"),
 		Options:  []string{r.FormValue("mcq1"), r.FormValue("mcq2"), r.FormValue("mcq3"), r.FormValue("mcq4")},
 		Answer:   r.FormValue("answer"),
 	}
-	key := datastore.NewIncompleteKey(c, "MCQ", mcqKey(c))
+	key := datastore.NewIncompleteKey(c, "MCQ", controller.MCQKey(c))
 	_, err = datastore.Put(c, key, &mcq)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -223,13 +212,13 @@ func addhandler(w http.ResponseWriter, r *http.Request) {
 
 func getAdminContents(c appengine.Context) string {
 	var resp bytes.Buffer
-	q := datastore.NewQuery("MCQ").Ancestor(mcqKey(c))
+	q := datastore.NewQuery("MCQ").Ancestor(controller.MCQKey(c))
 	cnt, err := q.Count(c)
 	if err != nil {
 		return err.Error()
 	}
 
-	mcqs := make([]MCQ, 0, cnt)
+	mcqs := make([]controller.MCQ, 0, cnt)
 	if _, err := q.GetAll(c, &mcqs); err != nil {
 		return err.Error()
 	}
@@ -242,8 +231,8 @@ func getAdminContents(c appengine.Context) string {
 
 func getUserContents(c appengine.Context) string {
 	var resp bytes.Buffer
-	q := datastore.NewQuery("MCQ").Ancestor(mcqKey(c)).Limit(10)
-	mcqs := make([]MCQ, 0, 10)
+	q := datastore.NewQuery("MCQ").Ancestor(controller.MCQKey(c)).Limit(10)
+	mcqs := make([]controller.MCQ, 0, 10)
 	if _, err := q.GetAll(c, &mcqs); err != nil {
 		return err.Error()
 	}

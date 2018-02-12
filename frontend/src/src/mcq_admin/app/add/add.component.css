@@ -1,0 +1,13 @@
+.add-form {
+  display: inline-flex;
+  flex-direction: column;
+  width: 100%;
+}
+.mcq-radio-group {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.mcq-radio-button {
+  margin: 5px;
+}
